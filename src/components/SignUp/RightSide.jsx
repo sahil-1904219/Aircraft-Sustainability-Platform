@@ -100,9 +100,11 @@ export default function RightSide() {
             onChange={handleChange}
           >
             <option value="">User Type</option>
-            <option value="HTML">Aircraft Manufacturers</option>
-            <option value="CSS">Airline</option>
-            <option value="JS">Recycling facilities</option>
+            <option value="Aircraft Manufacturers">
+              Aircraft Manufacturers
+            </option>
+            <option value="Airline">Airline</option>
+            <option value="Recycling facilities">Recycling facilities</option>
           </select>
           {formErrors.UserType && (
             <p className={rightStyle.error}>{formErrors.UserType}</p>
