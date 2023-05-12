@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import rightStyle from "./rightSide.module.css";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 export default function RightSide() {
   const [formValues, setFormValues] = useState({
     name: "",
-    username: "",
+    email: "",
     password: "",
     UserType: "",
     checkBox: false,
@@ -49,9 +50,25 @@ export default function RightSide() {
     setFormErrors(errors);
 
     if (valid) {
-      console.log("s");
-      window.localStorage.setItem("userData", JSON.stringify(formValues));
+      // console.log("s");
+      // window.localStorage.setItem("userData", JSON.stringify(formValues));
       // navigate("/Genre");
+
+      // ... form validation code ...
+
+      console.log("s");
+
+      // Make a POST request to the API
+      axios
+        .post("https://example.com/api/formdata", formValues)
+        .then((response) => {
+          console.log(response.data);
+          // Optionally, you can redirect the user to a success page or show a success message
+        })
+        .catch((error) => {
+          console.error(error);
+          // Handle any errors here
+        });
     }
   };
 
@@ -76,7 +93,7 @@ export default function RightSide() {
           <input
             onChange={handleChange}
             type="text"
-            name="username"
+            name="email"
             placeholder="UserName"
             required
           ></input>
