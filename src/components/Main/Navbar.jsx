@@ -14,8 +14,11 @@ function Nevbar() {
   };
 
   const handleFileChange = (event) => {
-    setFile(event.target.files[0]);
-    setUploadError("");
+    const files = event.target.files;
+    if (files && files.length > 0) {
+      setFile(files[0]);
+      setUploadError("");
+    }
   };
 
   const handleFileUpload = async () => {
