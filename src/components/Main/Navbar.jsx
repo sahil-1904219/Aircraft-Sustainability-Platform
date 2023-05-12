@@ -93,7 +93,7 @@ function Nevbar() {
           "Location",
         ];
       case "recycle":
-        return  [
+        return [
           "Manufacturer",
           "Recycle Rate",
           "Aircraft Model",
@@ -113,7 +113,7 @@ function Nevbar() {
         <button
           style={{
             boxShadow: "none",
-            width: "25%",
+            width: "33.33%",
             padding: "10px 12px",
           }}
           className={selectedOption === "buy" ? "active" : ""}
@@ -124,7 +124,7 @@ function Nevbar() {
         <button
           style={{
             boxShadow: "none",
-            width: "25%",
+            width: "33.33%",
             padding: "10px 12px",
           }}
           className={selectedOption === "sell" ? "active" : ""}
@@ -135,30 +135,13 @@ function Nevbar() {
         <button
           style={{
             boxShadow: "none",
-            width: "25%",
+            width: "33.33%",
             padding: "10px 12px",
           }}
           className={selectedOption === "recycle" ? "active" : ""}
           onClick={() => handleOptionChange("recycle")}
         >
           Recycle
-        </button>
-        <label
-          style={{
-            boxShadow: "none",
-            width: "25%",
-            padding: "10px 12px",
-          }}
-        >
-          <input type="file" onChange={handleFileUpload} />
-        </label>
-        <button
-          style={{
-            padding: "10px 12px",
-          }}
-          onClick={handleFileChange}
-        >
-          Upload
         </button>
       </nav>
       <h2>{selectedOption}</h2>

@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import leftStyle from "./leftSide.module.css";
+import { useNavigate } from "react-router-dom";
 export default function LeftSide() {
   const [loginValues, setLoginValues] = useState({
     username: "",
     password: "",
   });
+  const navigate = useNavigate();
   const handleChange = (e) => {
     let value = e.target.value;
     setLoginValues({ ...loginValues, [e.target.name]: value });
@@ -14,10 +16,28 @@ export default function LeftSide() {
     e.preventDefault();
 
     let valid = true;
+    // if (valid) {
+    //   // console.log("s");
+    //   // window.localStorage.setItem("userData", JSON.stringify(loginValues));
+
+    // }
     if (valid) {
-      console.log("s");
-      window.localStorage.setItem("userData", JSON.stringify(loginValues));
-      // navigate("/Genre");
+      fetch("Login api -http://localhost:8080/auth/login", {
+        method: "POST",
+        body: JSON.stringify(loginValues),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            navigate("/Main");
+          } else {
+            console.log("q");
+          }
+        })
+        .catch((error) => console.error(error));
     }
   };
   return (
