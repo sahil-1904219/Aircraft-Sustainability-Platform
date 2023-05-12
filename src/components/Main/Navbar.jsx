@@ -1,12 +1,41 @@
 import React, { useState, useEffect } from "react";
+
 import "./Nevbar.css";
 
 function Nevbar() {
   const [selectedOption, setSelectedOption] = useState("buy");
   const [tableData, setTableData] = useState([]);
+  const [file, setFile] = useState(null);
+  const [uploadError, setUploadError] = useState("");
+
 
   const handleOptionChange = (option) => {
     setSelectedOption(option);
+  };
+
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+    setUploadError("");
+  };
+
+  const handleFileUpload = async () => {
+    const formData = new FormData();
+    formData.append("file", file);
+    try {
+      const response = await fetch("http://localhost:8080/parts/uploadFile", {
+        method: "POST",
+        body: formData,
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+      } else {
+        setUploadError("File upload failed");
+      }
+    } catch (error) {
+      console.error(error);
+      setUploadError("File upload failed");
+    }
   };
 
   useEffect(() => {
@@ -70,7 +99,7 @@ function Nevbar() {
         <button
            style={{
             boxShadow: "none",
-            width: "33.33%",
+            width: "25%",
             padding: "10px 12px",
           }}
           className={selectedOption === "buy" ? "active" : ""}
@@ -81,8 +110,9 @@ function Nevbar() {
         <button
            style={{
             boxShadow: "none",
-            width: "33.33%",
+            width: "25%",
             padding: "10px 12px",
+
           }}
           className={selectedOption === "sell" ? "active" : ""}
           onClick={() => handleOptionChange("sell")}
@@ -92,7 +122,7 @@ function Nevbar() {
         <button
            style={{
             boxShadow: "none",
-            width: "33.33%",
+            width: "25%",
             padding: "10px 12px",
           }}
           className={selectedOption === "recycle" ? "active" : ""}
@@ -100,6 +130,21 @@ function Nevbar() {
         >
           Recycle
         </button>
+        <label
+        style={{
+          boxShadow: "none",
+          width: "25%",
+          padding: "10px 12px",
+          }}
+        >
+      <input type="file" onChange={handleFileUpload} />
+    </label>
+        <button
+          style={{
+            padding: "10px 12px",
+            }}
+          onClick={handleFileChange}>Upload</button>
+
       </nav>
       <h2>{selectedOption}</h2>
       <table>
