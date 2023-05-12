@@ -43,9 +43,20 @@ function Nevbar() {
   const getColumns = () => {
     switch (selectedOption) {
       case "buy":
-        return ["id", "name", "buyprice"];
+        return [ "Manufacturer",
+        "Aircraft Model",
+        "Part Name",
+        "Material Composition",
+        "Age (years)",
+        "Location"];
       case "sell":
-        return ["id", "name", "sellPrice"];
+        return [ "Manufacturer",
+        "Potential Uses",
+        "Aircraft Model",
+        "Part Name",
+        "Material Composition",
+        "Age (years)",
+        "Location"];
       case "recycle":
         return ["id", "name", "weight"];
       default:
