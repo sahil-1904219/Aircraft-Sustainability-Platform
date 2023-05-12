@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import leftStyle from "./leftSide.module.css";
 export default function LeftSide() {
-  const handleChange = (e) => {};
-  const handleSubmit = (e) => {};
+  const [loginValues, setLoginValues] = useState({
+    username: "",
+    password: "",
+  });
+  const handleChange = (e) => {
+    let value = e.target.value;
+    setLoginValues({ ...loginValues, [e.target.name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    let valid = true;
+    if (valid) {
+      console.log("s");
+      window.localStorage.setItem("userData", JSON.stringify(loginValues));
+      // navigate("/Genre");
+    }
+  };
   return (
     <>
       <div className={leftStyle.leftSide}>
@@ -11,7 +28,7 @@ export default function LeftSide() {
           <input
             onChange={handleChange}
             type="text"
-            name="name"
+            name="username"
             placeholder="User Name"
             required
           ></input>
@@ -21,7 +38,7 @@ export default function LeftSide() {
           <input
             onChange={handleChange}
             type="Password"
-            name="username"
+            name="password"
             placeholder="Password"
             required
           ></input>
