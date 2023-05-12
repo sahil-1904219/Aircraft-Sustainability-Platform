@@ -7,7 +7,7 @@ export default function RightSide() {
     name: "",
     email: "",
     password: "",
-    UserType: "",
+    role: "",
     checkBox: false,
   });
   const [formErrors, setFormErrors] = useState({});
@@ -60,9 +60,10 @@ export default function RightSide() {
 
       // Make a POST request to the API
       axios
-        .post("https://example.com/api/formdata", formValues)
+        .post("http://localhost:8080/auth/signup", formValues)
         .then((response) => {
           console.log(response.data);
+          navigate("/Main")
           // Optionally, you can redirect the user to a success page or show a success message
         })
         .catch((error) => {
@@ -112,7 +113,7 @@ export default function RightSide() {
           )}
           <select
             id="formSelect"
-            name="UserType"
+            name="role"
             className="formSelect"
             onChange={handleChange}
           >

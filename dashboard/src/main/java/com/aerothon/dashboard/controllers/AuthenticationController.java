@@ -9,6 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/auth")
 @CrossOrigin(origins = "http://localhost:3000")
@@ -29,17 +32,21 @@ public class AuthenticationController {
 
 
     @PostMapping("/login")
-    public Boolean login(@RequestBody AuthenticationRequest authenticationRequest) {
+    public Map<String,Object>  login(@RequestBody AuthenticationRequest authenticationRequest) {
         String username = authenticationRequest.getUsername();
         String password = authenticationRequest.getPassword();
         User user = userRepository.findByEmail(username);
+        Map<String,Object> map=new HashMap<>();
+        map.put("success",true);
         if (user == null) {
-            return false;
+            map.put("success",false);
+            return map;
         }
         if (BCrypt.checkpw(password, user.getPassword())) {
-            return true;
+            return  map;
         } else {
-            return false;
+            map.put("success",false);
+            return map;
         }
     }
 }
