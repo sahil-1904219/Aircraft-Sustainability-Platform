@@ -22,7 +22,7 @@ export default function LeftSide() {
 
     // }
     if (valid) {
-      fetch("Login api -http://localhost:8080/auth/login", {
+      fetch("http://localhost:8080/auth/login", {
         method: "POST",
         body: JSON.stringify(loginValues),
         headers: {
