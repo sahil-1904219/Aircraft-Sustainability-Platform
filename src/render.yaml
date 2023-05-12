@@ -1,0 +1,13 @@
+services:
+  - name: my-app
+    buildCommand: yarn build
+    env:
+      - name: NODE_ENV
+        value: production
+      - name: API_URL
+        value: https://api.myapp.com
+    routes:
+      - path: /
+        serve: build/
+        headers:
+          cache-control: max-age=31536000
