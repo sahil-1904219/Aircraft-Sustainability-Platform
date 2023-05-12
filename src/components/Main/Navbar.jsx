@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import { useNavigate } from "react-router-dom";
 import "./Nevbar.css";
 
 function Nevbar() {
@@ -7,7 +7,7 @@ function Nevbar() {
   const [tableData, setTableData] = useState([]);
   const [file, setFile] = useState(null);
   const [uploadError, setUploadError] = useState("");
-
+  const navigate = useNavigate();
   const handleOptionChange = (option) => {
     setSelectedOption(option);
   };
@@ -39,7 +39,10 @@ function Nevbar() {
       setUploadError("File upload failed");
     }
   };
-
+  const handleLogout = (e) => {
+    e.preventDefault();
+    navigate("/");
+  };
   useEffect(() => {
     const getTableData = async () => {
       try {
@@ -144,7 +147,13 @@ function Nevbar() {
           Recycle
         </button>
       </nav>
-      <h2>{selectedOption}</h2>
+      <div className="buttoncolor" style={{ display: "flex", height: "8vh" }}>
+        <h2 style={{ paddingRight: "63vw" }}>{selectedOption}</h2>
+        <button style={{ width: "33.33%" }} onClick={handleLogout}>
+          {" "}
+          Logout
+        </button>
+      </div>
       <table>
         <thead>
           <tr>

@@ -7,9 +7,8 @@ export default function App() {
     <>
       <Routes>
         <Route path="/" element={<SignUp />} />
-        {/* {/* <Route path="/Genre" element={<Genre />} /> */}
+
         <Route path="/Main" element={<Main />} />
-        {/* <Route path="/browse" element={<Browse />} /> */}
       </Routes>
     </>
   );
