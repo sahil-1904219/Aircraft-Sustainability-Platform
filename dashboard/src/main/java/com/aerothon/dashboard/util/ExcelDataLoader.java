@@ -2,6 +2,9 @@ package com.aerothon.dashboard.util;
 
 import com.aerothon.dashboard.model.AircraftPart;
 import com.aerothon.dashboard.repositories.AircraftPartRepository;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -18,9 +21,7 @@ public class ExcelDataLoader {
     @Autowired
     private AircraftPartRepository aircraftPartRepository;
 
-    public void loadExcelData(String filePath) throws IOException {
-        FileInputStream file = new FileInputStream(new File(filePath));
-        XSSFWorkbook workbook = new XSSFWorkbook(file);
+    public void loadExcelData(XSSFWorkbook workbook) throws IOException {
 
         // Get the first sheet from the workbook
         XSSFSheet sheet = workbook.getSheetAt(0);
@@ -29,7 +30,10 @@ public class ExcelDataLoader {
         Iterator<Row> rowIterator = sheet.iterator();
         while (rowIterator.hasNext()) {
             Row row = rowIterator.next();
-
+            if (row.getRowNum() == 0) {
+                // skip the first row
+                continue;
+            }
             // Extract the data from each cell in the row
             String partName = row.getCell(0).getStringCellValue();
             String materialComposition = row.getCell(1).getStringCellValue();
@@ -37,7 +41,14 @@ public class ExcelDataLoader {
             String condition = row.getCell(3).getStringCellValue();
             String location = row.getCell(4).getStringCellValue();
             String manufacturer = row.getCell(5).getStringCellValue();
-            String aircraftModel = row.getCell(6).getStringCellValue();
+            String aircraftModel;
+            Cell aircraftModelCell = row.getCell(6); // assuming aircraft model is in the first column
+            if (aircraftModelCell.getCellType() == CellType.STRING) {
+                aircraftModel = aircraftModelCell.getStringCellValue();
+            } else {
+                DataFormatter dataFormatter = new DataFormatter();
+                aircraftModel = dataFormatter.formatCellValue(aircraftModelCell);
+            }
             String potentialUseCases = row.getCell(7).getStringCellValue();
             int newPartsCarbonFootprint = (int) row.getCell(8).getNumericCellValue();
             int recycledPartsCarbonFootprint = (int) row.getCell(9).getNumericCellValue();
@@ -73,6 +84,6 @@ public class ExcelDataLoader {
         }
 
         workbook.close();
-        file.close();
+
     }
 }
