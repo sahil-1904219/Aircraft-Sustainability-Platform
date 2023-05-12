@@ -93,7 +93,15 @@ function Nevbar() {
           "Location",
         ];
       case "recycle":
-        return ["id", "name", "weight"];
+        return  [
+          "Manufacturer",
+          "Recycle Rate",
+          "Aircraft Model",
+          "Part Name",
+          "Material Composition",
+          "Age (years)",
+          "Location",
+        ];
       default:
         return [];
     }

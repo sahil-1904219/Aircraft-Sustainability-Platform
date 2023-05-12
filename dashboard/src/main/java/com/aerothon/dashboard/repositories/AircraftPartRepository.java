@@ -18,4 +18,6 @@ public interface AircraftPartRepository extends JpaRepository<AircraftPart, Long
 
 
     List<AircraftPart> findByCondition(String condition);
+
+    List<AircraftPart> findByRecyclingRateGreaterThan(double recyclingRate);
 }

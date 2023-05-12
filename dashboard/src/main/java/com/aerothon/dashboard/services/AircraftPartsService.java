@@ -58,4 +58,24 @@ public class AircraftPartsService {
         }
         return oldAircraftParts;
     }
+    public List<Map<String,Object>> getPartsToRecycle()
+    {
+        List<AircraftPart> aircraftParts=aircraftPartRepository.findByRecyclingRateGreaterThan(50.0);
+        List<Map<String,Object>> toRecycleAircraftParts=new ArrayList<>();
+
+        for(AircraftPart aircraftPart:aircraftParts)
+        {
+            Map<String,Object> toRecycleAircraftPart=new HashMap<>();
+            toRecycleAircraftPart.put("Part Name",aircraftPart.getPartName());
+            toRecycleAircraftPart.put("Material Composition",aircraftPart.getMaterialComposition());
+            toRecycleAircraftPart.put("Age (years)",aircraftPart.getAgeYears());
+            toRecycleAircraftPart.put("Location",aircraftPart.getLocation());
+            toRecycleAircraftPart.put("Manufacturer",aircraftPart.getManufacturer());
+            toRecycleAircraftPart.put("Aircraft Model",aircraftPart.getAircraftModel());
+            toRecycleAircraftPart.put("Recycle Rate",aircraftPart.getRecyclingRate());
+            toRecycleAircraftParts.add(toRecycleAircraftPart);
+
+        }
+        return toRecycleAircraftParts;
+    }
 }

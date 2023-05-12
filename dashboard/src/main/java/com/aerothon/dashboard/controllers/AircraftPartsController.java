@@ -44,7 +44,11 @@ public class AircraftPartsController {
 
         return aircraftPartsService.getNewAircraftPartsToSell();
     }
+    @GetMapping("/recycle")
+    public List<Map<String,Object>>  getPartsToRecycle() {
 
+        return aircraftPartsService.getPartsToRecycle();
+    }
     @GetMapping("/oldParts")
     public List<Map<String,Object>> getOldParts() {
         return aircraftPartsService.getOldAircraftPartsToSell();
