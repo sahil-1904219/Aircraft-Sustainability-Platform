@@ -1,63 +1,109 @@
-import React from "react";
+import React, { useState } from "react";
+import "./Nevbar.css";
 
-export default function Navbar() {
+function Nevbar() {
+  const [selectedOption, setSelectedOption] = useState("buy");
+
+  const handleOptionChange = (option) => {
+    setSelectedOption(option);
+  };
+
+  const getTableData = () => {
+    // Replace with API call to fetch data based on selectedOption
+    switch (selectedOption) {
+      case "buy":
+        return [
+          { id: 1, name: "Component A", price: "$1000" },
+          { id: 2, name: "Component B", price: "$500" },
+          { id: 3, name: "Component C", price: "$2000" },
+        ];
+      case "sell":
+        return [
+          { id: 4, name: "Component D", price: "$1500" },
+          { id: 5, name: "Component E", price: "$300" },
+          { id: 6, name: "Component F", price: "$2500" },
+        ];
+      case "recycle":
+        return [
+          { id: 7, name: "Component G", weight: "100 kg" },
+          { id: 8, name: "Component H", weight: "50 kg" },
+          { id: 9, name: "Component I", weight: "200 kg" },
+        ];
+      default:
+        return [];
+    }
+  };
+
   return (
-    <div
-      style={{
-        width: "100vw",
-        height: "8vh",
-        backgroundColor: "green",
-        display: "flex",
-        border: "2px solid black",
-        boxSizing: "border-box",
-      }}
-    >
-      <button
-        type="submit"
-        style={{
-          boxShadow: "none",
-          width: "33.33%",
-          //   marginTop: "12px",
-          //   borderRadius: "24px",
-          padding: "10px 12px",
-          //   color: white;
-          //   backgroundColor: "#72db73",
-          //   border: "none",
-        }}
-      >
-        Buy
-      </button>
-      <button
-        type="submit"
-        style={{
-          //   boxShadow: "none",
-          width: "33.33%",
+    <div className="Nevbar">
+      <nav>
+        <button
+           style={{
+            boxShadow: "none",
+            width: "33.33%",
+            padding: "10px 12px",
+          }}
 
-          //   marginTop: "12px",
-          //   borderRadius: "24px",
-          padding: "10px 12px",
-          //   color: white;
-          //   backgroundColor: "#72db73",
-          //   border: "none",
-        }}
-      >
-        Sell
-      </button>
-      <button
-        type="submit"
-        style={{
-          boxShadow: "none",
-          width: "33.33%",
-          //   marginTop: "12px",
-          //   borderRadius: "24px",
-          padding: "10px 12px",
-          //   color: white;
-          //   backgroundColor: "#72db73",
-          //   border: "none",
-        }}
-      >
-        Recycle
-      </button>
+          className={selectedOption === "buy" ? "active" : ""}
+          onClick={() => handleOptionChange("buy")}
+
+        >
+          Buy
+        </button>
+        <button
+           style={{
+            boxShadow: "none",
+            width: "33.33%",
+            padding: "10px 12px",
+          }}
+          className={selectedOption === "sell" ? "active" : ""}
+          onClick={() => handleOptionChange("sell")}
+        >
+          Sell
+        </button>
+        <button
+           style={{
+            boxShadow: "none",
+            width: "33.33%",
+            padding: "10px 12px",
+          }}
+          className={selectedOption === "recycle" ? "active" : ""}
+          onClick={() => handleOptionChange("recycle")}
+        >
+          Recycle
+        </button>
+      </nav>
+      <h2>{selectedOption}</h2>
+      <table>
+        <thead>
+          <tr>
+            {selectedOption === "buy" || selectedOption === "sell" ? (
+              <>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price</th>
+              </>
+            ) : (
+              <>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Weight</th>
+              </>
+            )}
+          </tr>
+        </thead>
+        <tbody>
+          {getTableData().map((item) => (
+            <tr key={item.id}>
+              <td>{item.id}</td>
+              <td>{item.name}</td>
+              <td>{selectedOption === "buy" || selectedOption === "sell" ? item.price : item.weight}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
+
+export default Nevbar;
