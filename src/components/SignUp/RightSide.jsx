@@ -63,6 +63,7 @@ export default function RightSide() {
         .post("http://localhost:8080/auth/signup", formValues)
         .then((response) => {
           console.log(response.data);
+          navigate("/Main")
           // Optionally, you can redirect the user to a success page or show a success message
         })
         .catch((error) => {
