@@ -8,7 +8,6 @@ function Nevbar() {
   const [file, setFile] = useState(null);
   const [uploadError, setUploadError] = useState("");
 
-
   const handleOptionChange = (option) => {
     setSelectedOption(option);
   };
@@ -75,20 +74,24 @@ function Nevbar() {
   const getColumns = () => {
     switch (selectedOption) {
       case "buy":
-        return [ "Manufacturer",
-        "Aircraft Model",
-        "Part Name",
-        "Material Composition",
-        "Age (years)",
-        "Location"];
+        return [
+          "Manufacturer",
+          "Aircraft Model",
+          "Part Name",
+          "Material Composition",
+          "Age (years)",
+          "Location",
+        ];
       case "sell":
-        return [ "Manufacturer",
-        "Potential Uses",
-        "Aircraft Model",
-        "Part Name",
-        "Material Composition",
-        "Age (years)",
-        "Location"];
+        return [
+          "Manufacturer",
+          "Potential Uses",
+          "Aircraft Model",
+          "Part Name",
+          "Material Composition",
+          "Age (years)",
+          "Location",
+        ];
       case "recycle":
         return ["id", "name", "weight"];
       default:
@@ -100,7 +103,7 @@ function Nevbar() {
     <div className="Nevbar">
       <nav>
         <button
-           style={{
+          style={{
             boxShadow: "none",
             width: "25%",
             padding: "10px 12px",
@@ -111,11 +114,10 @@ function Nevbar() {
           Buy
         </button>
         <button
-           style={{
+          style={{
             boxShadow: "none",
             width: "25%",
             padding: "10px 12px",
-
           }}
           className={selectedOption === "sell" ? "active" : ""}
           onClick={() => handleOptionChange("sell")}
@@ -123,7 +125,7 @@ function Nevbar() {
           Sell
         </button>
         <button
-           style={{
+          style={{
             boxShadow: "none",
             width: "25%",
             padding: "10px 12px",
@@ -134,20 +136,22 @@ function Nevbar() {
           Recycle
         </button>
         <label
-        style={{
-          boxShadow: "none",
-          width: "25%",
-          padding: "10px 12px",
+          style={{
+            boxShadow: "none",
+            width: "25%",
+            padding: "10px 12px",
           }}
         >
-      <input type="file" onChange={handleFileUpload} />
-    </label>
+          <input type="file" onChange={handleFileUpload} />
+        </label>
         <button
           style={{
             padding: "10px 12px",
-            }}
-          onClick={handleFileChange}>Upload</button>
-
+          }}
+          onClick={handleFileChange}
+        >
+          Upload
+        </button>
       </nav>
       <h2>{selectedOption}</h2>
       <table>
