@@ -2,7 +2,9 @@ package com.aerothon.dashboard.controllers;
 
 import com.aerothon.dashboard.model.AircraftPart;
 import com.aerothon.dashboard.repositories.AircraftPartRepository;
+import com.aerothon.dashboard.services.AircraftPartsService;
 import com.aerothon.dashboard.util.ExcelDataLoader;
+import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,9 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping("/parts")
@@ -25,6 +25,9 @@ public class AircraftPartsController {
     @Autowired
     private ExcelDataLoader excelDataLoader;
 
+    @Autowired
+    private AircraftPartsService aircraftPartsService;
+
     @GetMapping("/{id}")
     public ResponseEntity<AircraftPart> getPartById(@PathVariable Long id) {
         Optional<AircraftPart> part = aircraftPartsRepository.findById(id);
@@ -36,6 +39,16 @@ public class AircraftPartsController {
         return aircraftPartsRepository.findAll();
     }
 
+    @GetMapping("/newParts")
+    public List<Map<String,Object>>  getNewParts() {
+
+        return aircraftPartsService.getNewAircraftPartsToSell();
+    }
+
+    @GetMapping("/oldParts")
+    public List<Map<String,Object>> getOldParts() {
+        return aircraftPartsService.getOldAircraftPartsToSell();
+    }
     @GetMapping("/search")
     public List<AircraftPart> searchParts(@RequestParam(name = "name", required = false) String name,
                                           @RequestParam(name = "manufacturer", required = false) String manufacturer) {

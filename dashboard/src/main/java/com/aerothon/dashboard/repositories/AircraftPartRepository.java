@@ -17,4 +17,5 @@ public interface AircraftPartRepository extends JpaRepository<AircraftPart, Long
     List<AircraftPart> findByManufacturer(String manufacturer);
 
 
+    List<AircraftPart> findByCondition(String condition);
 }
