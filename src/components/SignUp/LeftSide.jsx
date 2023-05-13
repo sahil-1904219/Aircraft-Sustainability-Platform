@@ -31,9 +31,17 @@ export default function LeftSide() {
       })
         .then((response) => response.json())
         .then((data) => {
-          if (data.success) {
+          if (data.success && data.role==="manufacturer") {
+            navigate("/Manufacturer");
+          }else if(data.success && data.role==="Recycling facilities")
+          {
+            navigate("/Recycler");
+          }
+          else if(data.success && data.role==="Airline")
+          {
             navigate("/Main");
-          } else {
+          } 
+          else {
             console.log("q");
           }
         })
