@@ -43,7 +43,8 @@ public class AuthenticationController {
             return map;
         }
         if (BCrypt.checkpw(password, user.getPassword())) {
-            return  map;
+            {map.put("role",user.getRole());
+                return  map;}
         } else {
             map.put("success",false);
             return map;

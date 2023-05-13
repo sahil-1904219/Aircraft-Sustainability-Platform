@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./Nevbar.css";
 
 function Nevbar() {
-  const [selectedOption, setSelectedOption] = useState("buy");
+  const [selectedOption, setSelectedOption] = useState("recycle");
   const [tableData, setTableData] = useState([]);
   const [file, setFile] = useState(null);
   const [uploadError, setUploadError] = useState("");
@@ -48,11 +48,9 @@ function Nevbar() {
       try {
         let response;
         switch (selectedOption) {
-          case "buy":
-            response = await fetch("http://localhost:8080/parts/newParts");
-            break;
-          case "sell":
-            response = await fetch("http://localhost:8080/parts/oldParts");
+       
+          case "recycle":
+            response = await fetch("http://localhost:8080/parts/recycle");
             break;
           default:
             return [];
@@ -73,25 +71,7 @@ function Nevbar() {
 
   const getColumns = () => {
     switch (selectedOption) {
-      case "buy":
-        return [
-          "Manufacturer",
-          "Aircraft Model",
-          "Part Name",
-          "Material Composition",
-          "Age (years)",
-          "Location",
-        ];
-      case "sell":
-        return [
-          "Manufacturer",
-          "Potential Uses",
-          "Aircraft Model",
-          "Part Name",
-          "Material Composition",
-          "Age (years)",
-          "Location",
-        ];
+   
       case "recycle":
         return [
           "Manufacturer",
@@ -110,10 +90,10 @@ function Nevbar() {
   return (
     <div className="Nevbar">
       <nav>
-        <button
+        {/* <button
           style={{
             boxShadow: "none",
-            width: "33.3%",
+            width: "25%",
             padding: "10px 12px",
           }}
           className={selectedOption === "buy" ? "active" : ""}
@@ -124,28 +104,28 @@ function Nevbar() {
         <button
           style={{
             boxShadow: "none",
-            width: "33.3%",
+            width: "25%",
             padding: "10px 12px",
           }}
           className={selectedOption === "sell" ? "active" : ""}
           onClick={() => handleOptionChange("sell")}
         >
           Sell
-        </button>
-        {/* <button
+        </button> */}
+        <button
           style={{
             boxShadow: "none",
-            width: "25%",
+            width: "50%",
             padding: "10px 12px",
           }}
           className={selectedOption === "recycle" ? "active" : ""}
           onClick={() => handleOptionChange("recycle")}
         >
           Recycle
-        </button> */}
+        </button>
         <button  style={{
             boxShadow: "none",
-            width: "33.3%",
+            width: "50%",
             padding: "10px 12px",
           }} onClick={handleLogout}>
           {" "}
