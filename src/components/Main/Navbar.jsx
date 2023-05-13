@@ -116,7 +116,7 @@ function Nevbar() {
         <button
           style={{
             boxShadow: "none",
-            width: "33.33%",
+            width: "25%",
             padding: "10px 12px",
           }}
           className={selectedOption === "buy" ? "active" : ""}
@@ -127,7 +127,7 @@ function Nevbar() {
         <button
           style={{
             boxShadow: "none",
-            width: "33.33%",
+            width: "25%",
             padding: "10px 12px",
           }}
           className={selectedOption === "sell" ? "active" : ""}
@@ -138,7 +138,7 @@ function Nevbar() {
         <button
           style={{
             boxShadow: "none",
-            width: "33.33%",
+            width: "25%",
             padding: "10px 12px",
           }}
           className={selectedOption === "recycle" ? "active" : ""}
@@ -146,14 +146,18 @@ function Nevbar() {
         >
           Recycle
         </button>
-      </nav>
-      <div className="buttoncolor" style={{ display: "flex", height: "8vh" }}>
-        <h2 style={{ paddingRight: "63vw" }}>{selectedOption}</h2>
-        <button style={{ width: "33.33%" }} onClick={handleLogout}>
+        <button  style={{
+            boxShadow: "none",
+            width: "25%",
+            padding: "10px 12px",
+          }} onClick={handleLogout}>
           {" "}
           Logout
         </button>
-      </div>
+      </nav>
+      {/* <div className="buttoncolor" style={{ display: "flex", height: "8vh" }}> */}
+        <h2 style={{ paddingRight: "63vw" }}>{selectedOption}</h2>
+      {/* </div> */}
       <table>
         <thead>
           <tr>
