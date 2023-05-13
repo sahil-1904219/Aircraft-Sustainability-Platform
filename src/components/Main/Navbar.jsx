@@ -143,17 +143,23 @@ function Nevbar() {
         >
           Recycle
         </button> */}
-        <button  style={{
+        <button
+          style={{
             boxShadow: "none",
             width: "33.3%",
             padding: "10px 12px",
-          }} onClick={handleLogout}>
+          }}
+          onClick={handleLogout}
+        >
           {" "}
           Logout
         </button>
       </nav>
       {/* <div className="buttoncolor" style={{ display: "flex", height: "8vh" }}> */}
-        <h2 style={{ paddingRight: "63vw" }}>{selectedOption}</h2>
+      {/* <h2 style={{ paddingRight: "63vw" }}>{selectedOption}</h2> */}
+      <h2 style={{ textAlign: "center" }}>
+        <u>AIRLINE</u>
+      </h2>
       {/* </div> */}
       <table>
         <thead>

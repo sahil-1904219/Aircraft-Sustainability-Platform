@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Nevbar.css";
 
-function Nevbar() {
+function RecycleNavbar() {
   const [selectedOption, setSelectedOption] = useState("recycle");
   const [tableData, setTableData] = useState([]);
   const [file, setFile] = useState(null);
@@ -48,7 +48,6 @@ function Nevbar() {
       try {
         let response;
         switch (selectedOption) {
-       
           case "recycle":
             response = await fetch("http://localhost:8080/parts/recycle");
             break;
@@ -71,7 +70,6 @@ function Nevbar() {
 
   const getColumns = () => {
     switch (selectedOption) {
-   
       case "recycle":
         return [
           "Manufacturer",
@@ -123,17 +121,23 @@ function Nevbar() {
         >
           Recycle
         </button>
-        <button  style={{
+        <button
+          style={{
             boxShadow: "none",
             width: "50%",
             padding: "10px 12px",
-          }} onClick={handleLogout}>
+          }}
+          onClick={handleLogout}
+        >
           {" "}
           Logout
         </button>
       </nav>
       {/* <div className="buttoncolor" style={{ display: "flex", height: "8vh" }}> */}
-        <h2 style={{ paddingRight: "63vw" }}>{selectedOption}</h2>
+      {/* <h2 style={{ paddingRight: "63vw" }}>{selectedOption}</h2> */}
+      <h2 style={{ textAlign: "center" }}>
+        <u>RECYCLER</u>
+      </h2>
       {/* </div> */}
       <table>
         <thead>
@@ -157,4 +161,4 @@ function Nevbar() {
   );
 }
 
-export default Nevbar;
+export default RecycleNavbar;

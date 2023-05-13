@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Nevbar.css";
 
-function Nevbar() {
+function ManufacturerNavbar() {
   const [selectedOption, setSelectedOption] = useState("buy");
   const [tableData, setTableData] = useState([]);
   const [file, setFile] = useState(null);
@@ -133,17 +133,23 @@ function Nevbar() {
         >
           Recycle
         </button> */}
-        <button  style={{
+        <button
+          style={{
             boxShadow: "none",
             width: "33.33%",
             padding: "10px 12px",
-          }} onClick={handleLogout}>
+          }}
+          onClick={handleLogout}
+        >
           {" "}
           Logout
         </button>
       </nav>
       {/* <div className="buttoncolor" style={{ display: "flex", height: "8vh" }}> */}
-        <h2 style={{ paddingRight: "63vw" }}>{selectedOption}</h2>
+      {/* <h2 style={{ paddingRight: "63vw" }}>{selectedOption}</h2> */}
+      <h2 style={{ textAlign: "center" }}>
+        <u>MANUFACTURER</u>
+      </h2>
       {/* </div> */}
       <table>
         <thead>
@@ -167,4 +173,4 @@ function Nevbar() {
   );
 }
 
-export default Nevbar;
+export default ManufacturerNavbar;
