@@ -15,6 +15,21 @@ export default function RightSide() {
   const handleChange = (e) => {
     let value = e.target.value;
     setFormValues({ ...formValues, [e.target.name]: value });
+    if (e.target.name === "password") {
+      if (value.length > 10) {
+        setFormErrors({
+          ...formErrors,
+          [e.target.name]: "Password Too Big",
+        });
+        return;
+      } else if (value.length < 8) {
+        setFormErrors({
+          ...formErrors,
+          [e.target.name]: "Password Too Short",
+        });
+        return;
+      }
+    }
     setFormErrors({
       ...formErrors,
       [e.target.name]:
@@ -63,7 +78,7 @@ export default function RightSide() {
         .post("http://localhost:8080/auth/signup", formValues)
         .then((response) => {
           console.log(response.data);
-         
+          alert("You have successfully signed up!");
           // Optionally, you can redirect the user to a success page or show a success message
         })
         .catch((error) => {
@@ -98,8 +113,8 @@ export default function RightSide() {
             placeholder="UserName"
             required
           ></input>
-          {formErrors.username && (
-            <p className={rightStyle.error}>{formErrors.username}</p>
+          {formErrors.email && (
+            <p className={rightStyle.error}>{formErrors.email}</p>
           )}
           <input
             onChange={handleChange}
@@ -124,8 +139,8 @@ export default function RightSide() {
             <option value="Airline">Airline</option>
             <option value="Recycling facilities">Recycling facilities</option>
           </select>
-          {formErrors.UserType && (
-            <p className={rightStyle.error}>{formErrors.UserType}</p>
+          {formErrors.role && (
+            <p className={rightStyle.error}>{formErrors.role}</p>
           )}
           <label>
             <input
