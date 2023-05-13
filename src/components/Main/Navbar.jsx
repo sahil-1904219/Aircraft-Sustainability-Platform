@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
 import "./Nevbar.css";
 
 function Nevbar() {
@@ -8,10 +9,11 @@ function Nevbar() {
   const [file, setFile] = useState(null);
   const [uploadError, setUploadError] = useState("");
   const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState("");
   const handleOptionChange = (option) => {
     setSelectedOption(option);
   };
-
+  const [limit, setLimit] = useState(1000);
   const handleFileChange = (event) => {
     const files = event.target.files;
     if (files && files.length > 0) {
@@ -59,7 +61,8 @@ function Nevbar() {
         }
         if (response.ok) {
           const data = await response.json();
-          setTableData(data);
+          setTableData(data.map((item) => ({ ...item, searchQuery: "" })));
+
         } else {
           throw new Error("API call failed");
         }
@@ -106,6 +109,24 @@ function Nevbar() {
         return [];
     }
   };
+
+  const handleSearch = () => {
+    const filteredData = tableData.map((item) => ({
+      ...item,
+      searchQuery,
+    })).filter((item) => {
+      return Object.values(item).some(
+        (value) =>
+          value &&
+          value
+            .toString()
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase())
+      );
+    }).slice(0,limit);
+    setTableData(filteredData);
+  };
+
 
   return (
     <div className="Nevbar">
@@ -161,6 +182,16 @@ function Nevbar() {
         <u>AIRLINE</u>
       </h2>
       {/* </div> */}
+
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder="Search..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        <button onClick={handleSearch}>Search</button>
+      </div>
       <table>
         <thead>
           <tr>
@@ -170,13 +201,15 @@ function Nevbar() {
           </tr>
         </thead>
         <tbody>
-          {tableData.map((item) => (
-            <tr key={item.id}>
-              {getColumns().map((column) => (
-                <td key={column}>{item[column]}</td>
-              ))}
-            </tr>
-          ))}
+          {tableData
+            .filter((item) => item.searchQuery.includes(searchQuery))
+            .map((item) => (
+              <tr key={item.id}>
+                {getColumns().map((column) => (
+                  <td key={column}>{item[column]}</td>
+                ))}
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>
