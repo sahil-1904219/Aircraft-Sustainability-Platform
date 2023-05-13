@@ -31,18 +31,15 @@ export default function LeftSide() {
       })
         .then((response) => response.json())
         .then((data) => {
-          if (data.success && data.role==="manufacturer") {
+          if (data.success && data.role === "manufacturer") {
             navigate("/Manufacturer");
-          }else if(data.success && data.role==="Recycling facilities")
-          {
+          } else if (data.success && data.role === "Recycling facilities") {
             navigate("/Recycler");
-          }
-          else if(data.success && data.role==="Airline")
-          {
+          } else if (data.success && data.role === "Airline") {
             navigate("/Main");
-          } 
-          else {
+          } else {
             console.log("q");
+            alert("Username or Password incorrect");
           }
         })
         .catch((error) => console.error(error));

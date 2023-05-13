@@ -79,6 +79,13 @@ export default function RightSide() {
         .then((response) => {
           console.log(response.data);
           alert("You have successfully signed up!");
+          setFormValues({
+            name: "",
+            email: "",
+            password: "",
+            role: "",
+            checkBox: false,
+          });
           // Optionally, you can redirect the user to a success page or show a success message
         })
         .catch((error) => {
