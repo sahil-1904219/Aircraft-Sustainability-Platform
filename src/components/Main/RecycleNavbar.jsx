@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Nevbar.css";
-
+import chart from "./recycle.jpg";
 function RecycleNavbar() {
   const [selectedOption, setSelectedOption] = useState("recycle");
   const [tableData, setTableData] = useState([]);
@@ -38,6 +38,11 @@ function RecycleNavbar() {
       console.error(error);
       setUploadError("File upload failed");
     }
+  };
+  const [showImage, setShowImage] = useState(false);
+
+  const handleButtonClick = () => {
+    setShowImage(!showImage);
   };
   const handleLogout = (e) => {
     e.preventDefault();
@@ -113,7 +118,7 @@ function RecycleNavbar() {
         <button
           style={{
             boxShadow: "none",
-            width: "50%",
+            width: "33.33%",
             padding: "10px 12px",
           }}
           className={selectedOption === "recycle" ? "active" : ""}
@@ -124,7 +129,7 @@ function RecycleNavbar() {
         <button
           style={{
             boxShadow: "none",
-            width: "50%",
+            width: "33.33%",
             padding: "10px 12px",
           }}
           onClick={handleLogout}
@@ -132,6 +137,31 @@ function RecycleNavbar() {
           {" "}
           Logout
         </button>
+        <button
+          style={{
+            boxShadow: "none",
+            width: "33.33%",
+            padding: "10px 12px",
+          }}
+          onClick={handleButtonClick}
+        >
+          Show Charts
+        </button>
+        {showImage && (
+          <img
+            src={chart}
+            alt="Image"
+            style={{
+              width: "70%",
+              marginTop: "10px",
+              position: "fixed",
+              top: "55.5%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              zIndex: "9999",
+            }}
+          />
+        )}
       </nav>
       {/* <div className="buttoncolor" style={{ display: "flex", height: "8vh" }}> */}
       {/* <h2 style={{ paddingRight: "63vw" }}>{selectedOption}</h2> */}
