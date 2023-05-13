@@ -69,9 +69,12 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
-#Backend
+# Backend
+
 Spring boot is used in Backend to build the server and Mysql Database is used.
-##Command to Run backed
+
+## Command to Run backed
+
 cd dashboard
 
 mvn spring-boot:run
